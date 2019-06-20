@@ -1,0 +1,22 @@
+Y:\ffxiv_resources\Baha_Plugin(1.0.9)\src\obj\Debug\Baha_Plugin.BahaPriority.resources
+Y:\ffxiv_resources\Baha_Plugin(1.0.9)\src\obj\Debug\Baha_Plugin.csproj.GenerateResource.Cache
+Y:\ffxiv_resources\Baha_Plugin(1.0.9)\src\obj\Debug\Baha_Plugin.csproj.CoreCompileInputs.cache
+Y:\ffxiv_resources\Baha_Plugin(1.0.9)\src\bin\Debug\Baha_Plugin.dll
+Y:\ffxiv_resources\Baha_Plugin(1.0.9)\src\bin\Debug\Baha_Plugin.pdb
+Y:\ffxiv_resources\Baha_Plugin(1.0.9)\src\bin\Debug\Advanced Combat Tracker.exe
+Y:\ffxiv_resources\Baha_Plugin(1.0.9)\src\bin\Debug\FFXIV.Framework.dll
+Y:\ffxiv_resources\Baha_Plugin(1.0.9)\src\bin\Debug\FFXIV_ACT_Plugin.dll
+Y:\ffxiv_resources\Baha_Plugin(1.0.9)\src\bin\Debug\FFXIV_MemoryReader.Model.dll
+Y:\ffxiv_resources\Baha_Plugin(1.0.9)\src\bin\Debug\System.dll
+Y:\ffxiv_resources\Baha_Plugin(1.0.9)\src\bin\Debug\System.Drawing.dll
+Y:\ffxiv_resources\Baha_Plugin(1.0.9)\src\bin\Debug\System.Windows.Forms.dll
+Y:\ffxiv_resources\Baha_Plugin(1.0.9)\src\bin\Debug\System.Xml.dll
+Y:\ffxiv_resources\Baha_Plugin(1.0.9)\src\bin\Debug\GammaJul.LgLcd.dll
+Y:\ffxiv_resources\Baha_Plugin(1.0.9)\src\bin\Debug\ICSharpCode.SharpZipLib.dll
+Y:\ffxiv_resources\Baha_Plugin(1.0.9)\src\bin\Debug\NLog.dll
+Y:\ffxiv_resources\Baha_Plugin(1.0.9)\src\bin\Debug\Advanced Combat Tracker.exe.config
+Y:\ffxiv_resources\Baha_Plugin(1.0.9)\src\obj\Debug\Baha_Plugin.csproj.CopyComplete
+Y:\ffxiv_resources\Baha_Plugin(1.0.9)\src\obj\Debug\Baha_Plugin.dll
+Y:\ffxiv_resources\Baha_Plugin(1.0.9)\src\obj\Debug\Baha_Plugin.pdb
+Y:\ffxiv_resources\Baha_Plugin(1.0.9)\src\obj\Debug\Properties.Resources.resources
+Y:\ffxiv_resources\Baha_Plugin(1.0.9)\src\obj\Debug\Baha_Plugin.csprojAssemblyReference.cache
