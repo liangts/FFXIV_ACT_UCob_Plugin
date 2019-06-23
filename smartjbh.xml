@@ -1,0 +1,481 @@
+<?xml version="1.0" encoding="utf-8"?>
+<timeline>
+  <name>绝巴哈</name>
+  <rev>20190617.001</rev>
+  <description>
+    作者：lts
+  </description>
+  <locale>JA</locale>
+  <zone>The Unending Coil Of Bahamut (Ultimate)</zone>
+  <entry>双塔</entry>
+  <start>(0039:戦闘開始！|0039:Engage|tl_start)</start>
+
+  <default target-element="Activity" target-attr="notice-d" value="Both" />
+  <default target-element="Activity" target-attr="notice-o" value="-5" />
+
+  <!-- Trigger Definition-->
+  <!-- Misc -->
+  <t text="倒计时" sync="戦闘開始まで15秒！" sync-count="1">
+    <v-notice text="倒计时" duration="15" />
+  </t>
+  
+  <!-- 转阶段判定-->
+  <t sync="バハムート・プライムの「第七霊災」|Bahamut Prime uses Seventh Umbral Era" goto="巴哈"/>
+  <t sync="おぉ、バハムート！|O Bahamut! We shall stand guard as you make ready your divine judgment!" goto="Phase4"/>
+  <t sync="バハムート・プライムの「テラフレア」|Bahamut Prime uses Teraflare" goto="Phase5"/>
+
+  <!-- Reset Timeline Trigger-->
+  <t enabled="true" sync="Removing combatant Bahamut Prime" goto="RReset" />
+
+  <!-- In-game operation commands-->
+  <t sync="tl_p1" goto="双塔" />
+  <t sync="tl_p2" goto="奈尔" />
+  <t sync="tl_p3" goto="巴哈" />
+  <t sync="tl_p4" goto="Phase4" />
+  <t sync="tl_p5" goto="Phase5" />
+  <t sync="tl_reset" goto="RReset" />
+
+  <!-- 奈尔专用trigger-->
+  <s name="Nael">
+    <!-- 台词1-->
+    <t name="进去集合" sync="(O red moon, scorch mine enemies!|月よ！ 赤熱し、神敵を焼け！|月光啊！ 用你的炽热烧尽敌人！)" goto="台词1-A">
+      <v-notice text="进去" duration="5" icon="AOEOutside.png" order="-2"/>
+      <v-notice text="集合分伤" duration="8" icon="DamageShare.png" order="-1"/>
+    </t>
+    <t name="进去远离" sync="(O red moon, shine the path to conquest!|月よ！ 鉄の覇道を照らせ！|月光啊！ 照亮铁血霸道！)" goto="台词1-B">
+      <v-notice text="进去" duration="5" icon="AOEOutside.png" order="-2"/>
+      <v-notice text="远离" duration="8" icon="AOEInside.png" order="-1"/>
+    </t>
+
+    <!-- 台词2-->  
+    <t name="分伤进去" sync="(O refulgent moon, shine down your light!|赤熱せし 月の祝福を！|炽热燃烧！ 给予我月亮的祝福！)" goto="台词2-A">
+      <v-notice text="集合分伤" duration="5" icon="DamageShare.png" order="-2"/>
+      <v-notice text="进去" duration="8" icon="AOEOutside.png" order="-1"/>
+    </t>
+    <t name="分伤远离" sync="(Blazing path, lead me to conquest!|赤熱し、焼かれし道を 鉄の覇道と成す！|被炽热灼烧过的轨迹 乃成铁血霸道！)" goto="台词2-B">
+      <v-notice text="集合分伤" duration="5" icon="DamageShare.png" order="-2"/>
+      <v-notice text="远离" duration="8" icon="AOEInside.png" order="-1"/>
+    </t>
+
+    <!-- 台词3-->
+    <t name="散开进去" sync="(From on high I descend, in blessed light to bask!|我、舞い降りて 月を仰がん！|我降临于此， 对月长啸！)" goto="台词3-A">
+      <v-notice text="散开" duration="5" icon="Leave.png" order="-2"/>
+      <v-notice text="进去" duration="8" icon="AOEOutside.png" order="-1"/>
+    </t>
+    <t name="散开远离" sync="(From on high I descend, mine enemies to smite!|我、舞い降りて 鉄の覇道を征く！|我降临于此， 征战铁血霸道！)" goto="台词3-B">
+      <v-notice text="散开" duration="5" icon="Leave.png" order="-2"/>
+      <v-notice text="远离" duration="8" icon="AOEInside.png" order="-1"/>
+    </t>
+
+    <!-- 台词4-->
+    <t name="跳T进去" sync="(Fleeting light, score the earth with a fiery kiss!|超新星よ、輝きを増せ！ 紅月下の赤熱せし地を照らせ！|超新星啊，更加闪耀吧！ 照亮红月下炽热之地！)" goto="台词4-A">
+      <v-notice text="跳T" duration="15" order="-2"/>
+      <v-notice text="集合分伤" duration="18" icon="DamageShare.png" order="-1"/>
+    </t>
+    <t name="散开远离T" sync="(Fleeting light, outshine the stars for the moon!|超新星よ、輝きを増せ！ 星降りの夜に、紅月を称えよ！|超新星啊，更加闪耀吧！ 在星降之夜，称赞红月！)" goto="台词4-B">
+      <v-notice text="散开" duration="15" icon="Leave.png" order="-2"/>
+      <v-notice text="跳T" duration="18" order="-1"/>
+    </t>
+    
+    <!-- 钢铁月环判定完成提示-->
+    <t text="月环判定" sync="16:40.*?:26BC">
+      <v-notice text="月环已判定" duration="2" />
+    </t>
+    <t text="钢铁判定" sync="16:40.*?:26BB">
+      <v-notice text="钢铁已判定" duration="2" />
+    </t>    
+  </s> <!-- 奈尔Trigger结束-->
+
+  <!-- 巴哈专用trigger-->
+  <s name="Baha">
+    <t sync="バハムート・プライムは「進軍の三重奏」の構え|Bahamut Prime starts using Quickmarch Trio" goto="进军" />
+    <t sync="バハムート・プライムは「黒炎の三重奏」の構え|Bahamut Prime starts using Blackfire Trio" goto="黑炎" />
+    <t sync="バハムート・プライムは「厄災の三重奏」の構え|Bahamut Prime starts using Fellruin Trio" goto="灾厄" />
+    <t sync="バハムート・プライムは「天地の三重奏」の構え|Bahamut Prime starts using Heavensfall Trio" goto="天地" />
+    <t sync="バハムート・プライムは「連撃の三重奏」の構え|Bahamut Prime starts using Tenstrike Trio" goto="连击" notice="找1，2，D点"/>
+    <t sync="バハムート・プライムは「群竜の八重奏」の構え|Bahamut Prime starts using Grand Octet" goto="群龙" />
+  </s>
+
+  <s name="p4">
+    <t name="远离集合散开" sync="(Gleaming steel, take fire and descend!|鉄よ、赤熱せよ！ 舞い降りし我が刃となれ！|钢铁燃烧吧！ 成为我降临于此的刀剑吧！)">
+      <v-notice text="远离" duration="5" icon="AOEInside.png" order="-2"/>
+      <v-notice text="集合" duration="8" icon="DamageShare.png" order="-1"/>
+      <v-notice text="散开" duration="11" icon="Leave.png" order="0"/>
+    </t>
+    <t name="远离散开集合" sync="(Gleaming steel, plunge and take fiery edge!|鉄よ、舞い降りし 我の刃となり赤熱せよ！|钢铁成为我降临于此的燃烧之剑！)">
+      <v-notice text="远离" duration="5" icon="AOEInside.png" order="-2"/>
+      <v-notice text="散开" duration="8" icon="Leave.png" order="-1"/>
+      <v-notice text="集合" duration="11" icon="DamageShare.png" order="0"/>
+    </t>
+    <t name="进去远离散开" sync="(From red moon I draw steel, in my descent to bare!|我、月より鉄を備え 舞い降りん！|我自月而来携钢铁降临于此！)">
+      <v-notice text="进去" duration="5" icon="AOEOutside.png" order="-2"/>
+      <v-notice text="远离" duration="8" icon="DamageShare.png" order="-1"/>
+      <v-notice text="散开" duration="11" icon="Leave.png" order="0"/>
+    </t>
+    <t name="进去散开集合" sync="(From red moon I descend, upon burning earth to tread!|我、月より舞い降りて 赤熱せし地を歩まん！|我自月而来降临于此， 踏过炽热之地！)">
+      <v-notice text="进去" duration="5" icon="AOEOutside.png" order="-2"/>
+      <v-notice text="散开" duration="8" icon="Leave.png" order="-1"/>
+      <v-notice text="集合" duration="11" icon="DamageShare.png" order="0"/>
+    </t>
+    <t text="月环判定" sync="16:40.*?:26BC">
+      <v-notice text="月环已判定" duration="2" />
+    </t>
+    <t text="钢铁判定" sync="16:40.*?:26BB">
+      <v-notice text="钢铁已判定" duration="2" />
+    </t> 
+  </s>
+  <!-- ###################### -->
+
+  <!-- Phase Entry -->
+
+  <!-- Timeline -->  
+  <s name="双塔">
+    <import source="Nael" />
+    <import source="Baha" />
+    <a time="007" text="下压" sync="ツインタニアの「プラメット」|Twintania uses Plummet"  />
+    <a time="011" text="旋风" sync="ツインタニア starts using ツイスター on ツインタニア|Twintania starts using Twister"  />
+    <a time="016" text="分伤" sync="ツインタニアの「ファイアボール」|Twintania uses Fireball"  />
+    <a time="020" text="死刑" sync="ツインタニアは「デスセンテンス」の構え。|Twintania readies Death Sentence"  />
+    <a time="028" text="下压" sync="ツインタニアの「プラメット」|Twintania uses Plummet"  />
+    <a time="030" text="旋风" sync="ツインタニアは「ツイスター」の構え。|Twintania readies Twister"  />
+    <a time="036" text="分伤" sync="ツインタニアの「ファイアボール」|Twintania uses Fireball"  />
+    <a time="048" text="引导火"  />
+    <a time="053" text="魔力錬成" sync="ツインタニアは「魔力錬成」の構え。|Twintania readies Generate" />
+    <a time="060" text="引导火" />
+    <a time="067" text="死刑" sync="ツインタニアは「デスセンテンス」の構え。|Twintania readies Death Sentence"  />
+    <a time="075" text="魔力錬成" sync="ツインタニアは「魔力錬成」の構え。|Twintania readies Generate"  />
+    <a time="079" text="旋风" sync="ツインタニアは「ツイスター」の構え。|Twintania readies Twister"  />
+    <a time="088" text="下压" sync="ツインタニアの「プラメット」|Twintania uses Plummet"  />
+    <a time="094" text="引导火" />
+    <a time="114" text="魔力錬成" sync="ツインタニアは「魔力錬成」の構え。|Twintania readies Generate" sync-s="-20"/>
+    <a time="122" text="随机火"/>
+    <a time="128" text="分伤" sync="ツインタニアの「ファイアボール」|Twintania uses Fireball"  />
+    <a time="133" text="死刑" sync="ツインタニアは「デスセンテンス」の構え。|Twintania readies Death Sentence" notice="烟雾弹"  />
+    <a time="141" text="下压" sync="ツインタニアの「プラメット」|Twintania uses Plummet"  />
+    <a time="144" text="魔力錬成" sync="ツインタニアは「魔力錬成」の構え。|Twintania readies Generate" />
+    <a time="148" text="旋风" sync="ツインタニアは「ツイスター」の構え。|Twintania readies Twister"  />
+    <a time="156" text="下压" sync="ツインタニアの「プラメット」|Twintania uses Plummet"  />
+    <a time="159" text="引导火"/>
+    <a time="164" text="魔力錬成" sync="ツインタニアは「魔力錬成」の構え。|Twintania readies Generate"  />
+    <a time="171" text="随机火"/>
+    <a time="178" text="分伤" sync="ツインタニアの「ファイアボール」|Twintania uses Fireball"  />
+    <a time="182" text="死刑" sync="ツインタニアは「デスセンテンス」の構え。|Twintania readies Death Sentence"  />
+    <a time="185" text="下一阶段"  goto="奈尔" sync=":26B8:" sync-s="-30" />
+  </s>
+
+  <s name="奈尔">
+    <import source="Nael" />
+    <a time="004" text="地面AOE-1" sync="14:26B9:" sync-s="-30" />
+    <a time="006" text="陨石流1"/>
+    <a time="008" text="地面AOE-2" sync="14:26B9:" sync-s="-3"/>
+    <a time="009" text="陨石流2"/>
+    <a time="012" text="奈尔降落" sync="ネール・デウス・ダーナスの「ダラガブダイブ」|Nael deus Darnus uses Dalamud Dive"  />
+    <a time="014" text="5连爪"/>
+    <a time="019" text="龍神の加護" sync="ネール・デウス・ダーナスは「龍神の加護」の構え。|Nael deus Darnus readies Bahamut's Favor"  />
+    <a time="030" text="第一轮台词" sync="(O red moon, scorch mine enemies!|月よ！ 赤熱し、神敵を焼け！|月光啊！ 用你的炽热烧尽敌人！)" goto="台词1-A" sync-s="-100"/>
+    <a time="030" sync="(O red moon, shine the path to conquest!|月よ！ 鉄の覇道を照らせ！|月光啊！ 照亮铁血霸道！)" goto="台词1-B" sync-s="-100"/>
+  </s>
+
+  <s name="台词1-A">
+    <import source="Nael" />
+    <a time="005" text="雷判定" sync="サンダーウィングの「チェインライトニング」|Thunderwing uses Chain Lightning"  />
+    <a time="005" text="月环" sync="ネール・デウス・ダーナスの「ルナダイナモ」|Nael deus Darnus uses Lunar Dynamo"  />
+    <a time="009" text="集合分伤" sync="ネール・デウス・ダーナスの「サーミオニックビーム」|Nael deus Darnus uses Thermionic Beam"  />
+    <a time="011" text="火连线【进】" />
+    <a time="011" text="白圈+死亡宣告" />
+    <a time="020" text="5连爪" />
+    <a time="025" text="火【出】" notice="二火去一"/>
+    <a time="027" text="先放雷后台词" notice="二雷出" notice-o="-4" />
+  </s>
+
+  <s name="台词1-B">
+    <import source="Nael" />
+    <a time="005" text="雷判定" sync="サンダーウィングの「チェインライトニング」|Thunderwing uses Chain Lightning"  />
+    <a time="005" text="月环" sync="ネール・デウス・ダーナスの「ルナダイナモ」|Nael deus Darnus uses Lunar Dynamo"  />
+    <a time="009" text="钢铁远离" sync="ネール・デウス・ダーナスの「アイアンチャリオット」|Nael deus Darnus uses Iron Chariot"  />
+    <a time="011" text="火连线【进】" />
+    <a time="011" text="白圈+死亡宣告" />
+    <a time="020" text="5连爪" />
+    <a time="025" text="火【出】" notice="二火去一"/>
+    <a time="027" text="先放雷后台词" notice="二雷出" notice-o="-4" />
+  </s>
+
+  <s name="台词2-A">
+    <import source="Nael" />
+    <a time="002" text="雷判定"  sync="サンダーウィングの「チェインライトニング」|Thunderwing uses Chain Lightning" sync-s="-3" />
+    <a time="005" text="集合分伤" sync="ネール・デウス・ダーナスの「サーミオニックビーム」|Nael deus Darnus uses Thermionic Beam"  />
+    <a time="008" text="月环" sync="ネール・デウス・ダーナスの「ルナダイナモ」|Nael deus Darnus uses Lunar Dynamo"  />
+    <a time="011" text="白圈+死亡宣告" />
+    <a time="021" text="雷判定"  sync="サンダーウィングの「チェインライトニング」|Thunderwing uses Chain Lightning" sync-s="-4" />
+    <a time="024" text="火连线【进】" />
+    <a time="027" text="5连爪" />
+    <t enabled="false" text="先雷后火" sync="1A:Bugu Dearest gains the effect of Thunderstruck from  for [0-9\.]+ Seconds">
+      <v-notice text="先雷后火" duration="5" />
+    </t>
+  </s>
+
+  <s name="台词2-B">
+    <import source="Nael" />
+    <a time="002" text="雷判定"  sync="サンダーウィングの「チェインライトニング」|Thunderwing uses Chain Lightning" sync-s="-3" />
+    <a time="005" text="集合分伤" sync="ネール・デウス・ダーナスの「サーミオニックビーム」|Nael deus Darnus uses Thermionic Beam"  />
+    <a time="008" text="钢铁远离" sync="ネール・デウス・ダーナスの「アイアンチャリオット」|Nael deus Darnus uses Iron Chariot"  />
+    <a time="011" text="白圈+死亡宣告" />
+    <a time="021" text="雷判定"  sync="サンダーウィングの「チェインライトニング」|Thunderwing uses Chain Lightning" sync-s="-4" />
+    <a time="024" text="火连线【进】" />
+    <a time="027" text="5连爪" />
+    <t enabled="false" text="先雷后火" sync="1A:Bugu Dearest gains the effect of Thunderstruck from  for [0-9\.]+ Seconds">
+      <v-notice text="先雷后火" duration="5" />
+    </t>
+  </s>
+
+  <s name="台词3-A">
+    <import source="Nael" />
+    <a time="005" text="散开" sync="ネール・デウス・ダーナスの「レイヴンダイブ」|Nael deus Darnus uses Raven Dive"  />
+    <a time="008" text="月环" sync="ネール・デウス・ダーナスの「ルナダイナモ」|Nael deus Darnus uses Lunar Dynamo" />
+    <a time="011" text="火连线【进】" />
+    <a time="012" text="白圈+死亡宣告" />
+    <a time="014" text="雷判定"  sync="サンダーウィングの「チェインライトニング」|Thunderwing uses Chain Lightning" sync-s="-4"/>
+    <a time="027" text="死刑" sync="ネール・デウス・ダーナスは「レイヴェンズビーク」の構え。||Nael deus Darnus starts using Ravensbeak" sync-s="-5" />
+    <a time="028" text="看俯冲A" notice="看俯冲" notice-o="-1" />
+    <t enabled="false" text="先火后雷" sync="1A:Bugu Dearest gains the effect of Thunderstruck from  for [0-9\.]+ Seconds">
+      <v-notice text="先火后雷" duration="5" />
+    </t>
+    <t name="火判定雷出去" sync="ファイアホーン:26C5:ファイアボール|Firehorn:26C5:Fireball" notice="雷出去" sync-count="1" />
+  </s>
+
+  <s name="台词3-B">
+    <import source="Nael" />
+    <a time="005" text="散开" sync="ネール・デウス・ダーナスの「レイヴンダイブ」|Nael deus Darnus uses Raven Dive"  />
+    <a time="008" text="钢铁远离" sync="ネール・デウス・ダーナスの「アイアンチャリオット」|Nael deus Darnus uses Iron Chariot" />
+    <a time="011" text="火连线【进】" />
+    <a time="012" text="白圈+死亡宣告" />
+    <a time="014" text="雷判定"  sync="サンダーウィングの「チェインライトニング」|Thunderwing uses Chain Lightning" sync-s="-4" />
+    <a time="027" text="死刑" sync="ネール・デウス・ダーナスは「レイヴェンズビーク」の構え。|Nael deus Darnus starts using Ravensbeak" sync-s="-5" />
+    <a time="028" text="看俯冲A" notice="看俯冲" notice-o="-1" />
+    <t enabled="false" text="先火后雷" sync="1A:Bugu Dearest gains the effect of Thunderstruck from  for [0-9\.]+ Seconds">
+      <v-notice text="先火后雷" duration="5" />
+    </t>
+    <t name="进来吃火" sync="ネール・デウス・ダーナスの「アイアンチャリオット」|Nael deus Darnus uses Iron Chariot" notice="进来吃火" sync-count="1" />
+    <t name="火判定雷出去" sync="ファイアホーン:26C5:ファイアボール|Firehorn:26C5:Fireball" notice="雷出去" sync-count="1" />
+  </s>
+
+  <s name="台词4-A">
+    <import source="Nael" />
+    <a time="006" text="超新星4连" />
+    <a time="015" text="月华冲MT" sync="ネール・デウス・ダーナスの「ダラガブダイブ」|Nael deus Darnus uses Dalamud Dive" />
+    <a time="018" text="集合分伤" sync="ネール・デウス・ダーナスの「サーミオニックビーム」|Nael deus Darnus uses Thermionic Beam" />
+    <a time="023" text="5连爪" />
+    <a time="043" text="随机台词2次狂暴" />
+    <a time="050" text="巴哈阶段" goto="巴哈" />
+  </s>
+
+  <s name="台词4-B">
+    <import source="Nael" />
+    <a time="006" text="超新星4连" />
+    <a time="015" text="散开" sync="の「メテオストリーム」|uses Meteor Stream" />
+    <a time="018" text="月华冲MT" sync="ネール・デウス・ダーナスの「ダラガブダイブ」|Nael deus Darnus uses Dalamud Dive" />
+    <a time="023" text="5连爪" />
+    <a time="043" text="随机台词2次狂暴" />
+    <a time="050" text="巴哈阶段" goto="巴哈" />
+  </s>
+
+  <s name="巴哈">
+    <import source="Baha" />
+    <a time="003" text="火1" />
+    <a time="004" text="火2" />
+    <a time="005" text="火3" />
+    <a time="008" text="嘭！" />
+    <a time="010" text="巴哈选中" sync="Added new combatant (バハムート・プライム|Bahamut Prime)" />
+    <a time="016" text="顺劈吐火" sync="バハムート・プライムの「フレアブレス」|Bahamut Prime uses Flare Breath" notice-o="-5" >
+      <v-notice text="【战】原初+战栗" duration="5" order="-10" />
+      <v-notice text="【骑】血仇" duration="5" order="-9" />
+    </a>
+    <a time="020" text="死刑" sync="バハムート・プライムは「フラッテン」の構え|Bahamut Prime starts using Flatten" />
+    <a time="028" text="进军三重奏"/>
+  </s>
+
+  <s name="进军">
+    <import source="Baha" />
+    <a time="008" text="俯冲" sync="バハムート・プライムは「メガフレアダイブ」の構え|Bahamut Prime starts using Megaflare Dive" />
+    <a time="016" text="MegaFlare" sync="バハムート・プライムは「メガフレア」の構え|Bahamut Prime starts using Megaflare" />
+    <a time="021" text="集合分伤" />
+    <a time="023" text="Earth shaker" />
+    <a time="026" text="风" notice-o="-5">
+      <v-notice text="接到线20%" duration="3" />
+    </a>
+    <a time="030" text="顺劈吐火" sync="バハムート・プライムの「フレアブレス」|Bahamut Prime uses Flare Breath">
+      <v-notice text="30%" duration="4" />
+    </a>
+    <a time="033" text="死刑" sync="バハムート・プライムは「フラッテン」の構え|Bahamut Prime starts using Flatten" />
+    <a time="042" text="黑炎三重奏"/>
+    <t sync="バハムート・プライムは「フラッテン」の構え|Bahamut Prime starts using Flatten">
+      <v-notice text="【战】血仇" duration="3" />
+      <v-notice text="【龙】牵制" duration="3" />
+    </t>
+  </s>
+
+  <s name="黑炎">
+    <import source="Baha" />
+    <a time="009" text="火圈x5" />
+    <a time="012" text="分伤" sync="ネール・デウス・ダーナスの「サーミオニックビーム」|Nael deus Darnus uses Thermionic Beam" />
+    <a time="019" text="超新星4连" />
+    <a time="023" text="GigaFlare" sync="バハムート・プライムは「ギガフレア」の構え|Bahamut Prime starts using Gigaflare" />
+    <a time="037" text="顺劈吐火" sync="バハムート・プライムの「フレアブレス」|Bahamut Prime uses Flare Breath" sync-s="-15">
+      <v-notice text="[战]原初" duration="4" order="-10"/>
+      <v-notice text="[骑]干预" duration="4" order="-9"/>
+      <v-notice text="[召]万有" duration="4" order="-8"/>
+    </a>
+    <a time="039" text="顺劈吐火" sync="バハムート・プライムの「フレアブレス」|Bahamut Prime uses Flare Breath" sync-s="-2"/>
+    <a time="041" text="顺劈吐火" sync="バハムート・プライムの「フレアブレス」|Bahamut Prime uses Flare Breath" sync-s="-2" notice-o="-15" />
+    <a time="051" text="灾厄三重奏"/>
+  </s>
+
+  <s name="灾厄">
+    <import source="Baha" />
+    <a time="008" text="等待台词" />
+    <a time="019" text="风" />
+    <a time="020" text="以太失控AOE" notice="进拘束器" notice-o="-4"/>
+    <a time="023" text="GigaFlare" sync="バハムート・プライムは「ギガフレア」の構え|Bahamut Prime starts using Gigaflare" notice="散开散开" notice-o="-3" />
+    <a time="034" text="顺劈吐火" />
+    <a time="039" text="死刑" sync="バハムート・プライムは「フラッテン」の構え|Bahamut Prime starts using Flatten" />
+    <a time="048" text="顺劈吐火" />
+    <a time="054" text="天地三重奏" />
+    <t name="散开靠近散开" sync="(From on high I descend, a hail of stars to bring!|我、舞い降りて月を仰ぎ 星降りの夜を招かん！|我降临于此对月长啸！ 召唤星降之夜！)">
+      <v-notice text="散开" duration="5" icon="Leave.png" order="-3"/>
+      <v-notice text="月环" duration="8" icon="DamageShare.png" order="-2"/>
+      <v-notice text="点名散开" duration="15" icon="Leave.png" order="-1"/>
+    </t>
+    <t name="靠近散开散开" sync="(From red moon I descend, a hail of stars to bring!|我、月より舞い降りて 星降りの夜を招かん！|我自月而来降临于此， 召唤星降之夜！)">
+      <v-notice text="月环" duration="5" icon="DamageShare.png" order="-3"/>
+      <v-notice text="散开" duration="8" icon="Leave.png" order="-2"/>      
+      <v-notice text="点名散开" duration="15" icon="Leave.png" order="-1"/>
+    </t>
+    <t name="陨石流判定" sync="の「メテオストリーム」|uses Meteor Stream" notice="集合集合">
+      <v-notice text="点名已判定！"/>
+    </t>
+    <t name="Gigaflare 减伤" sync="バハムート・プライムは「ギガフレア」の構え|Bahamut Prime starts using Gigaflare">
+      <v-notice text="[战]20%再血仇" order="-10" />
+      <v-notice text="[骑]保护" order="-9" />
+      <v-notice text="[诗忍]护栏牵制" order="-8" />
+    </t>
+  </s>
+
+  <s name="天地">
+    <import source="Baha" />
+    <a time="012" text="Dive判定" sync="の「メテオストリーム」|uses Megaflare Dive" />
+    <a time="020" text="天崩地裂击退" sync=":26B8" />
+    <a time="022" text="塔判定" />
+    <a time="028" text="超新星x3" />
+    <a time="036" text="Gigaflare" sync="バハムート・プライムは「ギガフレア」の構え|Bahamut Prime starts using Gigaflare" />
+    <a time="042" text="Gigaflare判定"/>
+    <a time="051" text="顺劈吐火" />
+    <a time="053" text="顺劈吐火" />
+    <a time="055" text="顺劈吐火" />
+    <a time="063" text="连击" />
+  </s>
+
+  <s name="连击">
+    <import source="Baha" />
+    <a time="014" text="开疾跑" notice-o="-2" notice="开疾跑"/>
+    <a time="033" text="Gigaflare" sync="バハムート・プライムは「ギガフレア」の構え|Bahamut Prime starts using Gigaflare" />
+    <a time="039" text="Gigaflare判定" />
+    <a time="046" text="死刑" sync="バハムート・プライムは「フラッテン」の構え|Bahamut Prime starts using Flatten" />
+    <a time="054" text="顺劈吐火"/>
+
+  </s>
+
+  <s name="群龙">
+    <import source="Baha" />
+      <a time="030" text="听指挥" />
+      <a time="043" text="旋风走走走" notice="走走走" notice-o="-1"/>
+  </s>
+
+  <s name="Phase4">
+    <import source="p4" />
+    <a time="005" text="可以选中" />
+    <a time="013" text="5连爪">
+      <v-notice text="[战]血仇" duration="3" order="-10"/>
+    </a>
+    <a time="014" text="下压" sync="ツインタニアの「プラメット」|Twintania uses Plummet"/>
+    <a time="016" text="引导火"/>
+    <a time="022" text="黑球" sync="ツインタニアは「魔力錬成」の構え。|Twintania readies Generate"/>
+    <a time="027" text="旋风" sync="ツインタニアは「ツイスター」の構え。|Twintania readies Twister" />
+    <a time="031" text="台词1" />
+    <a time="044" text="旋风" sync="ツインタニアは「ツイスター」の構え。|Twintania readies Twister" />
+    <a time="051" text="MegaFlare" sync="ネール・デウス・ダーナスは「メガフレア」の構え|Nael Deus Darnus starts using Megaflare" notice="百万核爆">
+      <v-notice text="[战]直感防爆" duration="4" order="-10"/>
+    </a>
+    <a time="060" text="双T死刑" sync="ツインタニアは「デスセンテンス」の構え。|Twintania readies Death Sentence" notice="减伤减伤" notice-o="-3">
+      <v-notice text="[战]30%" duration="4" order="-10"/>
+      <v-notice text="[战]换T后血仇" duration="10" order="-9"/>
+    </a>
+    <a time="068" text="下压+5连" sync="ツインタニアの「プラメット」|Twintania uses Plummet" />
+    <a time="077" text="引导火" />
+    <a time="083" text="黑球" sync="ツインタニアは「魔力錬成」の構え。|Twintania readies Generate"/>
+    <a time="086" text="旋风" sync="ツインタニアは「ツイスター」の構え。|Twintania readies Twister"/>
+    <a time="090" text="台词2" />
+    <a time="102" text="旋风" sync="ツインタニアは「ツイスター」の構え。|Twintania readies Twister"/>
+    <a time="112" text="双T死刑" sync="ツインタニアは「デスセンテンス」の構え。|Twintania readies Death Sentence" notice-o="-7">
+      <v-notice text="[战]渐愈" duration="3" order="-10"/>
+      <v-notice text="[战]20%战栗" duration="5" order="-9"/>
+      <v-notice text="[战]换T原初" duration="7" order="-8"/>
+    </a>
+    <a time="121" text="MegaFlre" sync="ネール・デウス・ダーナスは「メガフレア」の構え|Nael Deus Darnus starts using Megaflare"/>
+    <a time="138" text="Enrage" />
+  </s>
+
+  <s name="Phase5">
+    <a time="003" text="牛逼嗷" />
+    <a time="012" text="凤凰出现" sync="絶望の淵に、不死鳥フェニックスの呼び声が響き渡る|The phoenix's shrill cry cuts through the pall of desperation!" />
+    <a time="025" text="复活，上BUFF" notice="5秒后复活" sync="16:40.*?:26F2"/>
+    <a time="043" text="分伤(1)" sync="バハムート・プライムは「モーン・アファー」の構え|Bahamut Prime starts using Morn Afah" notice="群体分摊，减伤准备" notice-o="-2">
+      <v-notice text="[战]摆脱" duration="1" order="-10"/>
+      <v-notice text="[学]罩子慈爱群盾" duration="5" order="-9"/>
+    </a>
+    <a time="052" text="Akh Morn(1)" sync="バハムート・プライムは「アク・モーン」の構え|Bahamut Prime starts using Akh Morn" notice="死亡轮回，战士单吃，死斗死斗" notice-o="-2" />
+    <a time="065" text="Exflare(1)" notice="地火准备，回中间，老猫打减伤" notice-o="-7" />
+    <a time="084" text="Akh Morn(2)" sync="バハムート・プライムは「アク・モーン」の構え|Bahamut Prime starts using Akh Morn" notice="死亡轮回，双T分摊，准备减伤。大地图灵" notice-o="-2">
+      <v-notice text="[战]30%" duration="2" order="-10"/>
+      <v-notice text="[战]20%战栗" duration="2" order="-9"/>
+      <v-notice text="[学]绿帽软软" duration="5" order="-8"/>
+    </a>
+    <a time="099" text="分伤(2)" sync="バハムート・プライムは「モーン・アファー」の構え|Bahamut Prime starts using Morn Afah" notice="群体分摊，减伤准备" notice-o="-2">
+      <v-notice text="[战]血仇" duration="2" order="-10"/>
+      <v-notice text="[学]罩子单盾扩散" duration="5" order="-9"/>
+    </a>
+    <a time="114" text="Exflare(2)" notice="地火准备，回中间，CEO打减伤" notice-o="-7" />
+    <a time="133" text="分伤(3)" sync="バハムート・プライムは「モーン・アファー」の構え|Bahamut Prime starts using Morn Afah" notice="群体分摊，减伤准备" notice-o="-2">
+      <v-notice text="[战]摆脱" duration="6" order="-10"/>
+      <v-notice text="[学]罩子群盾" duration="6" order="-9"/>
+      <v-notice text="[EOS]魔抗" duration="6" order="-8"/>
+    </a>
+    <a time="147" text="Akh Morn(3)" sync="バハムート・プライムは「アク・モーン」の構え|Bahamut Prime starts using Akh Morn" notice="死亡轮回，骑士单吃，无敌无敌" notice-o="-2" />
+    <a time="164" text="Exflare(3)" notice="地火准备，回中间" notice-o="-7"  />
+    <a time="183" text="分伤(4)" sync="バハムート・プライムは「モーン・アファー」の構え|Bahamut Prime starts using Morn Afah" notice="群体分摊，减伤准备。大地软软" notice-o="-2">
+      <v-notice text="[战]血仇" duration="5" order="-10"/>
+      <v-notice text="[战]渐愈" duration="5" order="-9"/>
+      <v-notice text="[学]40%UP群盾罩子" duration="6" order="-8"/>
+    </a>
+    <a time="197" text="Akh Morn(4)" sync="バハムート・プライムは「アク・モーン」の構え|Bahamut Prime starts using Akh Morn" notice="死亡轮回，双T分摊，准备减伤" notice-o="-2">
+      <v-notice text="[战]30%" duration="4" order="-10"/>
+      <v-notice text="[战]20%战栗" duration="4" order="-9"/>
+    </a>
+    <a time="215" text="Exflare(4)" notice="地火准备，回中间,老猫打减伤。躲完第火爆发药" notice-o="-7"  />
+    <a time="230" text="爆发药吃了吗？" notice="爆发药爆发药" notice-o="-4"/>
+    <a time="235" text="分伤(5)" sync="バハムート・プライムは「モーン・アファー」の構え|Bahamut Prime starts using Morn Afah" notice="群体分摊，减伤准备。大地图灵" notice-o="-2">
+      <v-notice text="[战]摆脱" duration="6" order="-10"/>
+      <v-notice text="[学]掐掉单盾扩散" duration="6" order="-8"/>
+    </a>
+    <a time="243" text="Enrage读条开始" sync="バハムート・プライムは「モーン・アファー」の構え|Bahamut Prime starts using Morn Afah"/>
+    <a time="253" text="Enrage开始"  notice="散开散开" notice-o="-7" />
+  </s>
+
+    <s name="RReset">
+    <a time="000" text="等待开怪重置"/>
+    <a time="020" text="等待开怪重置"/>
+    <a time="040" text="等待开怪重置"/>
+    <a time="060" text="等待开怪重置"/>
+    <t sync="0039:戦闘開始！|0039:Engage" goto="双塔" />
+  </s>
+
+</timeline>
